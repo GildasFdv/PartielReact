@@ -6,7 +6,6 @@ type MovieCardProps = {
 };
 
 export default function MovieCard({ movie } : MovieCardProps) {
-    console.log(movie);
     return (
         <div className="movie">
             <Link to={`/detail/${movie.id}/${movie.media_type || "tv"}`}>
