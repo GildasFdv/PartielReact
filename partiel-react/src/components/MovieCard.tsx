@@ -6,9 +6,10 @@ type MovieCardProps = {
 };
 
 export default function MovieCard({ movie } : MovieCardProps) {
+    console.log(movie);
     return (
         <div className="movie">
-            <Link to={`/detail/${movie.id}/${movie.media_type}`}>
+            <Link to={`/detail/${movie.id}/${movie.media_type || "tv"}`}>
                 <img src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`}/>
                 <div className="score">
                     <p>{movie.vote_average}</p>
