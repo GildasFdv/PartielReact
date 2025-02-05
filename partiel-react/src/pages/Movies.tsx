@@ -1,9 +1,11 @@
-import { Link } from "react-router";
+import Trend from "../components/Trend";
+import Popular from "../components/Popular";
 
 export default function Movies() {
     return (
-    <div>
-        <h2>Movies</h2>
-    </div>
+        <>
+            <Trend />
+            <Popular />
+        </>
     );
 }
