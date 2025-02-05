@@ -1,7 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import MovieCard from "./MovieCard";
 import useApiClient from "../services/ApiClientProvider";
-import { useEffect } from "react";
 
 export default function Trend() {
     const apiClient = useApiClient();
