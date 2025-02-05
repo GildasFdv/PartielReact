@@ -1,6 +1,15 @@
+import { useQuery } from "@tanstack/react-query";
 import MovieCard from "./MovieCard";
+import useApiClient from "../services/ApiClientProvider";
+import { useEffect } from "react";
 
 export default function Trend() {
+    const apiClient = useApiClient();
+    const { data, isLoading, isSuccess } = useQuery({
+        queryKey: ["trend"],
+        queryFn: () => apiClient.getDataByTrending('all', 'day')
+    });
+    
     return (
         <div className="wrapper">
             <div className="tendances-container container">
@@ -12,7 +21,12 @@ export default function Trend() {
                 </div>
                 <div className="grid-tendances" id="tendances">
                     {
-                        new Array(4).fill(0).map(() => <MovieCard />)
+                        isLoading &&
+                        <div>Loading...</div>
+                    }
+                    {
+                        isSuccess && data &&
+                        data.filter((m, i) => i < 4).map((m, i) => <MovieCard movie={m} key={i}/>)
                     }
                 </div>
             </div>

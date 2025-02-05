@@ -1,15 +1,20 @@
 import { Link } from "react-router";
+import { Movie } from "../services/ApiClient";
 
-export default function MovieCard() {
+type MovieCardProps = {
+    movie: Movie;
+};
+
+export default function MovieCard({ movie } : MovieCardProps) {
     return (
         <div className="movie">
             <Link to="details/id/id/movie/movie">
-                <img src="https://image.tmdb.org/t/p/w500/3rTNq7sgAoAKNK8axPYA6MoBO83.jpg"/>
+                <img src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`}/>
                 <div className="score">
-                    <p>68%</p>
+                    <p>{movie.vote_average}</p>
                 </div>
-                <h5>보고타: 마지막 기회의 땅</h5>
-                <p>31/12/2024</p>
+                <h5>{movie.title}</h5>
+                <p>{new Date(movie.release_date || movie.first_air_date).toLocaleDateString()}</p>
             </Link>
         </div>
     );

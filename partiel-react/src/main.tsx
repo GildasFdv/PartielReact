@@ -7,21 +7,24 @@ import Popular from './pages/Popular.tsx';
 import Series from './pages/Series.tsx';
 import Layout from './components/Layout.tsx';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { ApiClientProvider } from './services/ApiClientProvider.tsx';
 
 const queryClient = new QueryClient()
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
-    <QueryClientProvider client={queryClient}>
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<Layout />}>
-          <Route index element={<Movies />} />
-          <Route path="popular" element={<Popular />} />
-          <Route path="series" element={<Series />} />
-        </Route>
-      </Routes>
-    </BrowserRouter>
-    </QueryClientProvider> 
+    <ApiClientProvider>
+      <QueryClientProvider client={queryClient}>
+        <BrowserRouter>
+          <Routes>
+            <Route path="/" element={<Layout />}>
+              <Route index element={<Movies />} />
+              <Route path="popular" element={<Popular />} />
+              <Route path="series" element={<Series />} />
+            </Route>
+          </Routes>
+        </BrowserRouter>
+      </QueryClientProvider>
+    </ApiClientProvider>
   </StrictMode>,
 )
