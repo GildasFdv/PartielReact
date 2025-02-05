@@ -1,12 +1,17 @@
 import { useQuery } from "@tanstack/react-query";
 import useApiClient from "../services/ApiClientProvider";
 import MovieCard from "./MovieCard";
+import { useState } from "react";
+
+type Filter = 'top_rated' | 'popular';
 
 export default function Popular() {
+    const [filter, setFilter] = useState<Filter>('top_rated');
+
     const apiClient = useApiClient();
     const { data, isLoading, isSuccess } = useQuery({
-        queryKey: ["tvcategory"],
-        queryFn: () => apiClient.getDataByTvCategory()
+        queryKey: ["tvcategory", filter],
+        queryFn: () => apiClient.getDataByTvCategory(filter)
     });
 
     return (
@@ -16,8 +21,8 @@ export default function Popular() {
                 <div className="title-filter saveMe" id="title-category">
                     <h2>Séries TV</h2>
 
-                    <button className="active" id="top_rated">Mieux notées</button>
-                    <button id="popular">Populaires</button>
+                    <button className={filter == "top_rated" ? "active" : ""} id="top_rated" onClick={() => setFilter('top_rated')}>Mieux notées</button>
+                    <button className={filter == "popular" ? "active" : ""} id="popular" onClick={() => setFilter('popular')}>Populaires</button>
                 </div>
                 <div className="grid-tendances" id="populaires">
                     {
