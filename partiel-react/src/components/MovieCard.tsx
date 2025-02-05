@@ -8,7 +8,7 @@ type MovieCardProps = {
 export default function MovieCard({ movie } : MovieCardProps) {
     return (
         <div className="movie">
-            <Link to="details/id/id/movie/movie">
+            <Link to={`/detail/${movie.id}/${movie.media_type}`}>
                 <img src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`}/>
                 <div className="score">
                     <p>{movie.vote_average}</p>
